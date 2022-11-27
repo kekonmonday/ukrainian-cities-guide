@@ -1,0 +1,12 @@
+#content-container {
+  padding: 20px;
+}
+
+#content {
+  width: 100%;
+  max-width: 1200px;
+  background: white;
+  margin: 0 auto 0 auto;
+  border: 1px solid #e2e2e2;
+  padding: 20px;
+}
