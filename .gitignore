@@ -1,9 +1,9 @@
 # Environment variables
 
 # compiled output
-/dist
-/node_modules
-/package-lock.json
+dist
+node_modules
+package-lock.json
 
 # Logs
 logs
@@ -15,11 +15,12 @@ yarn-error.log*
 lerna-debug.log*
 
 # Tests
-/coverage
-/.nyc_output
+coverage
+.nyc_output
 
 # IDEs and editors
-/.idea
+.idea
+.vscode
 .project
 .classpath
 .c9/
