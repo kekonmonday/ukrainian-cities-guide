@@ -1,4 +1,4 @@
-import {config} from "@libs/utils/dotenv";
+import {config} from "dotenv";
 import * as path from "path";
 
 // Initializing dotenv
