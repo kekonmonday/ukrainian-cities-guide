@@ -2,7 +2,7 @@ import {IQueryHandler, QueryHandler} from "@nestjs/cqrs";
 import {Ok, Result} from "oxide.ts";
 import {QueryBase, QueryParams} from "@libs/ddd/query.base";
 import {CityModel} from "../../database/city.repository";
-import {Inject} from "@nestjs/common";
+import {Inject, LiteralObject} from "@nestjs/common";
 import {SPARQL_EXECUTOR} from "@libs/module/sparql/sparql.di-tokens";
 import {SparqlExecutorPort} from "@libs/module/sparql/sparql.type";
 
@@ -54,7 +54,6 @@ where
 { 
     ?thing a dbo:Building ;
         foaf:name ?c_name ;
-        rdfs:comment ?c_description ;
         dbo:location dbr:${query.name} .
 
     optional {
@@ -68,17 +67,24 @@ where
 
         const cityBuildings = await this.sparqlExecutor.execute(buildingsSparqlQuery);
 
+        const uniqAcc: LiteralObject = {};
         return Ok({
             name: city.name,
             areaTotalKm: city.areaTotalKm,
             description: city.description,
             mayor: city.leaderName,
-            knownFor: cityBuildings.map((cityBuilding) => {
-                return {
-                    name: cityBuilding.name,
-                    description: cityBuilding.description
-                };
-            })
+            knownFor: cityBuildings
+                .filter((cityBuilding) => {
+                    const result = !uniqAcc[cityBuilding.name];
+                    uniqAcc[cityBuilding.name] = true;
+                    return result;
+                })
+                .map((cityBuilding) => {
+                    return {
+                        name: cityBuilding.name,
+                        description: cityBuilding.description
+                    };
+                })
         });
     }
 }
