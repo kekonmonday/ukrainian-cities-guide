@@ -27,3 +27,5 @@ coverage
 *.launch
 .settings/
 *.sublime-workspace
+
+.DS_store
