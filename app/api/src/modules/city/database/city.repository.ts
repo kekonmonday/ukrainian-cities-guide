@@ -11,7 +11,15 @@ export const citySchema = z.object({
     name: z.string(),
     areaTotalKm: z.string(),
     description: z.string(),
-    mayor: z.string()
+    mayor: z.string(),
+    knownFor: z
+        .array(
+            z.object({
+                name: z.string(),
+                description: z.string()
+            })
+        )
+        .optional()
 });
 
 export type CityModel = z.TypeOf<typeof citySchema>;

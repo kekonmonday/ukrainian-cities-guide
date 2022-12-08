@@ -1,5 +1,6 @@
 import {ApiProperty} from "@nestjs/swagger";
 import {ResponseBase} from "@libs/api/response.base";
+import {CityBuildingResponseDto} from "@modules/city/dtos/city-building.response.dto";
 
 export class CityResponseDto extends ResponseBase {
     @ApiProperty({
@@ -26,4 +27,7 @@ export class CityResponseDto extends ResponseBase {
         description: "Name of mayor of city"
     })
     mayor: string;
+
+    @ApiProperty({isArray: true, type: CityBuildingResponseDto})
+    knownFor?: CityBuildingResponseDto[];
 }

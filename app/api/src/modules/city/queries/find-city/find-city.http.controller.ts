@@ -7,6 +7,7 @@ import {CityResponseDto} from "@modules/city/dtos/city.response.dto";
 import {FindCityQuery} from "@modules/city/queries/find-city/find-city.query-handler";
 import {CityModel} from "@modules/city/database/city.repository";
 import {CityMapper} from "@modules/city/city.mapper";
+import {CityBuildingResponseDto} from "@modules/city/dtos/city-building.response.dto";
 
 @Controller(routesV1.version)
 export class FindCityHttpController {
@@ -33,6 +34,17 @@ export class FindCityHttpController {
         response.mayor = city.mayor;
         response.description = city.description;
         response.areaTotalKm = city.areaTotalKm;
+
+        response.knownFor = city.knownFor?.map((building) => {
+            const buildingDto = new CityBuildingResponseDto({
+                id: building.name
+            });
+
+            buildingDto.name = building.name;
+            buildingDto.description = building.description;
+
+            return buildingDto;
+        });
 
         return response;
     }
