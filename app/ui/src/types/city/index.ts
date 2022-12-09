@@ -14,4 +14,11 @@ export type CityDetails = {
   mayor: string;
   description: string;
   areaTotalKm: string;
+  knownFor: CityKnownFor[];
+};
+
+export type CityKnownFor = {
+  id: string;
+  name: string;
+  description: string;
 };
