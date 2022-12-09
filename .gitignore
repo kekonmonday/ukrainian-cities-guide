@@ -15,14 +15,17 @@ yarn-error.log*
 lerna-debug.log*
 
 # Tests
-/coverage
-/.nyc_output
+coverage
+.nyc_output
 
 # IDEs and editors
-/.idea
+.idea
+.vscode
 .project
 .classpath
 .c9/
 *.launch
 .settings/
 *.sublime-workspace
+
+.DS_store
